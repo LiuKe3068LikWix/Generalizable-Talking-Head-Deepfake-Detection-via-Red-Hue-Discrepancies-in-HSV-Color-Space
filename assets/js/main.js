@@ -5,7 +5,7 @@ const LINKS = {
   dataset: "", // e.g., dataset landing page
 };
 
-// ====== Video configuration ======
+// ====== Demo config: one row per ID, 6 videos each ======
 const DEMOS = {
   ids: ["ID1", "ID2", "ID3", "ID4", "ID5"],
   files: ["1.mp4", "2.mp4", "3.mp4", "4.mp4", "5.mp4", "6.mp4"],
@@ -44,7 +44,6 @@ function $(id){ return document.getElementById(id); }
   setBtn(bCode, LINKS.code);
   setBtn(bDataset, LINKS.dataset);
 
-  // If all hidden, hide row container
   const allHidden = [bPaper, bCode, bDataset].every(b => b.style.display === "none");
   if(allHidden) row.style.display = "none";
 })();
@@ -52,55 +51,75 @@ function $(id){ return document.getElementById(id); }
 // Year
 $("year").textContent = new Date().getFullYear();
 
-// Demo tabs + grid
+// Build demo rows
 (function(){
-  const tabsEl = $("tabs");
-  const gridEl = $("videoGrid");
-  let active = DEMOS.ids[0];
+  const host = $("demoList");
+  if(!host) return;
 
-  function videoPath(id, fn){
-    return `${DEMOS.root}/${id}/${fn}`;
-  }
+  const videoPath = (id, fn) => `${DEMOS.root}/${id}/${fn}`;
 
-  function renderTabs(){
-    tabsEl.innerHTML = "";
-    DEMOS.ids.forEach(id=>{
-      const btn = document.createElement("button");
-      btn.className = "tab" + (id === active ? " active" : "");
-      btn.textContent = id;
-      btn.onclick = ()=>{ active = id; renderTabs(); renderGrid(); };
-      tabsEl.appendChild(btn);
+  // helper: pause others when one plays (reduces CPU/audio chaos)
+  const allVideos = [];
+  const attachSoloPlay = (v) => {
+    v.addEventListener("play", ()=>{
+      allVideos.forEach(x => { if(x !== v) x.pause(); });
     });
-  }
+    allVideos.push(v);
+  };
 
-  function renderGrid(){
-    gridEl.innerHTML = "";
+  DEMOS.ids.forEach(id=>{
+    const row = document.createElement("div");
+    row.className = "demo-row";
+
+    const head = document.createElement("div");
+    head.className = "demo-row-head";
+    head.innerHTML = `<b>${id}</b><span>6 videos</span>`;
+
+    const actions = document.createElement("div");
+    actions.className = "demo-row-actions";
+
+    const openFolder = document.createElement("a");
+    openFolder.className = "small-chip";
+    openFolder.textContent = "Open folder";
+    openFolder.href = `${DEMOS.root}/${id}/`;
+    openFolder.target = "_blank";
+    openFolder.rel = "noreferrer";
+    actions.appendChild(openFolder);
+
+    head.appendChild(actions);
+
+    const strip = document.createElement("div");
+    strip.className = "demo-strip";
+
     DEMOS.files.forEach((fn, idx)=>{
-      const card = document.createElement("div");
-      card.className = "vcard";
+      const tile = document.createElement("div");
+      tile.className = "vtile";
 
       const meta = document.createElement("div");
-      meta.className = "vmeta";
-      meta.innerHTML = `<b>${active}</b><span>Video ${idx + 1}</span>`;
+      meta.className = "vtile-meta";
+      meta.innerHTML = `<b>V${idx+1}</b><span>${fn}</span>`;
 
       const v = document.createElement("video");
       v.controls = true;
       v.playsInline = true;
       v.preload = "metadata";
       v.muted = DEMOS.mutedByDefault;
-      v.src = videoPath(active, fn);
+      v.src = videoPath(id, fn);
 
-      card.appendChild(meta);
-      card.appendChild(v);
-      gridEl.appendChild(card);
+      attachSoloPlay(v);
+
+      tile.appendChild(meta);
+      tile.appendChild(v);
+      strip.appendChild(tile);
     });
-  }
 
-  renderTabs();
-  renderGrid();
+    row.appendChild(head);
+    row.appendChild(strip);
+    host.appendChild(row);
+  });
 })();
 
-// BibTeX modal (optional)
+// BibTeX modal
 (function(){
   const modal = $("bibtexModal");
   const openBtn = $("btnBibtex");
@@ -109,8 +128,7 @@ $("year").textContent = new Date().getFullYear();
   const copyBtn = $("copyBibtex");
   const textEl = $("bibtexText");
 
-  // If you don't want BibTeX, hide button
-  // openBtn.style.display = "none"; return;
+  if(!modal || !openBtn) return;
 
   openBtn.addEventListener("click", (e)=>{
     e.preventDefault();
@@ -127,7 +145,6 @@ $("year").textContent = new Date().getFullYear();
     }
   });
 
-  // click outside to close
   modal.addEventListener("click", (e)=>{
     const rect = modal.getBoundingClientRect();
     const inside = rect.top<=e.clientY && e.clientY<=rect.bottom && rect.left<=e.clientX && e.clientX<=rect.right;
