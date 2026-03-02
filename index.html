@@ -1,276 +1,178 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Paper Project Page</title>
-  <meta name="description" content="Project page with title, abstract, method figure, and demo videos." />
+  <title>RHTHFD — Project Page</title>
+  <meta name="description" content="Generalizable Talking Head Deepfake Detection via Red Hue Discrepancies in HSV Color Space — Project Page" />
 
-  <style>
-    :root{
-      --bg:#0b0f14; --card:#111827; --text:#e5e7eb; --muted:#9ca3af;
-      --line:#1f2937; --shadow:0 10px 30px rgba(0,0,0,.35); --r:16px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-    }
-    a{color:inherit; text-decoration:none}
-    .container{width:min(1100px,92vw); margin:0 auto}
-    .topbar{
-      position:sticky; top:0; z-index:10;
-      background:rgba(11,15,20,.75); backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar .container{display:flex; justify-content:space-between; align-items:center; padding:14px 0}
-    .title{font-size:18px; font-weight:800}
-    .sub{font-size:12px; color:var(--muted); margin-top:3px}
-    .nav{display:flex; gap:14px}
-    .nav a{font-size:13px; color:var(--muted); padding:8px 10px; border-radius:999px}
-    .nav a:hover{color:var(--text); background:rgba(255,255,255,.06)}
-    @media(max-width:820px){.nav{display:none}}
-
-    .hero{padding:18px 0 6px}
-    .btnrow{display:flex; flex-wrap:wrap; gap:10px; margin:8px 0 12px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      padding:10px 14px; border-radius:999px;
-      font-size:13px; font-weight:700;
-    }
-    .btn:hover{background:rgba(255,255,255,.10)}
-    .ghost{background:transparent}
-    .meta{color:var(--muted); font-size:13px; line-height:1.6}
-
-    .card{
-      background:var(--card);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:var(--r);
-      box-shadow:var(--shadow);
-      padding:18px;
-      margin:14px 0;
-    }
-    h2{margin:0 0 10px; font-size:18px}
-    p{margin:0; line-height:1.75}
-    .hint{color:var(--muted); font-size:13px; margin-bottom:12px}
-
-    .figureWrap{
-      margin-top:10px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      overflow:hidden;
-      background:rgba(255,255,255,.03);
-    }
-    .figure{width:100%; height:auto; display:block; cursor:zoom-in}
-    .figcap{margin-top:10px; color:var(--muted); font-size:13px}
-
-    .tabs{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px}
-    .tab{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.05);
-      padding:8px 12px; border-radius:999px;
-      font-size:13px; font-weight:800; color:var(--muted);
-      cursor:pointer;
-    }
-    .tab.active{
-      background:rgba(96,165,250,.18);
-      border-color:rgba(96,165,250,.35);
-      color:var(--text);
-    }
-
-    .grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
-    @media(max-width:820px){.grid{grid-template-columns:1fr}}
-
-    .vcard{
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      overflow:hidden;
-    }
-    .vmeta{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:10px 12px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      color:var(--muted); font-size:12px;
-    }
-    .vmeta b{color:var(--text)}
-    video{width:100%; height:auto; display:block; background:#000}
-
-    dialog{
-      width:min(980px,92vw);
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:16px;
-      background:var(--card);
-      color:var(--text);
-      box-shadow:var(--shadow);
-    }
-    dialog::backdrop{background:rgba(0,0,0,.55)}
-    .dhead{display:flex; justify-content:space-between; align-items:center; padding:12px 14px;
-      border-bottom:1px solid rgba(255,255,255,.08)}
-    .xbtn{border:none; background:transparent; color:var(--muted); font-size:18px; cursor:pointer}
-    .xbtn:hover{color:var(--text)}
-    .zoom{padding:12px 14px 14px}
-    .zoom img{width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,.10)}
-    footer{padding:22px 0 34px; color:var(--muted); font-size:12px; text-align:center}
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Optional: clean academic font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header class="topbar">
-    <div class="container">
-      <div>
-        <div class="title" id="paperTitle">你的论文标题（替换我）</div>
-        <div class="sub" id="paperVenue">Conference/Journal, Year（可选）</div>
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-title">RHTHFD</div>
+        <div class="brand-sub">Project Page</div>
       </div>
+
       <nav class="nav">
-        <a href="#abstract">摘要</a>
-        <a href="#method">方法图</a>
-        <a href="#demos">示例视频</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#figures">Figures</a>
+        <a href="#demos">Demos</a>
       </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        ☰
+      </button>
+    </div>
+
+    <div class="mobile-nav container" id="mobileNav">
+      <a href="#abstract">Abstract</a>
+      <a href="#figures">Figures</a>
+      <a href="#demos">Demos</a>
     </div>
   </header>
 
   <main class="container">
+    <!-- HERO -->
     <section class="hero">
-      <div class="btnrow">
-        <a class="btn" id="pdfLink" href="#" target="_blank" rel="noreferrer">PDF</a>
-        <a class="btn" id="arxivLink" href="#" target="_blank" rel="noreferrer">arXiv</a>
-        <a class="btn" id="codeLink" href="#" target="_blank" rel="noreferrer">Code</a>
-        <a class="btn ghost" id="bibtexBtn" href="#" onclick="return false;">BibTeX（可选）</a>
+      <h1 class="paper-title" id="paperTitle">
+        Generalizable Talking Head Deepfake Detection via Red Hue Discrepancies in HSV Color Space
+      </h1>
+
+      <div class="paper-meta">
+        <div class="authors" id="authors">
+          Ke Liu, Jiwei Wei, Zeyu Ma, Guoqing Wang, Yang Yang
+        </div>
+        <div class="affiliation" id="affiliation">
+          University of Electronic Science and Technology of China
+        </div>
       </div>
-      <div class="meta" id="authors">作者：A, B, C（替换我）</div>
-      <div class="meta" id="affiliation">单位：XXX University / Lab（替换我）</div>
+
+      <!-- Optional buttons (safe defaults are hidden unless you set links in JS) -->
+      <div class="btn-row" id="btnRow">
+        <a class="btn" id="btnPaper" href="#" target="_blank" rel="noreferrer">Paper</a>
+        <a class="btn" id="btnCode" href="#" target="_blank" rel="noreferrer">Code</a>
+        <a class="btn" id="btnDataset" href="#" target="_blank" rel="noreferrer">Dataset</a>
+        <button class="btn btn-ghost" id="btnBibtex">BibTeX</button>
+      </div>
+
+      <div class="note">
+        <span class="pill">Unsupervised</span>
+        <span class="pill">HSV Red Hue</span>
+        <span class="pill">Radiance-Field AV Dataset (RFAV)</span>
+      </div>
     </section>
 
+    <!-- ABSTRACT -->
     <section id="abstract" class="card">
-      <h2>Abstract</h2>
-      <p id="paperAbstract">在这里粘贴你的摘要（可中英文）。</p>
-    </section>
-
-    <section id="method" class="card">
-      <h2>Method</h2>
-      <p class="hint">方法图文件路径固定为：<code>assets/img/method.pdf</code>（点击可放大）</p>
-      <div class="figureWrap">
-        <img class="figure" id="methodImg" src="assets/img/method.pdf" alt="Method figure" />
+      <div class="card-head">
+        <h2>Abstract</h2>
       </div>
-      <div class="figcap" id="figcap">Figure 1: 方法概览图说明（替换我）</div>
-    </section>
-
-    <section id="demos" class="card">
-      <h2>Demo Videos</h2>
-      <p class="hint">
-        视频路径规则：<code>assets/videos/IDx/1.mp4~6.mp4</code>（共 5 个 ID，每个 6 个视频）
+      <p class="prose" id="abstractText">
+        Deepfake video detection is crucial in preventing the dissemination of harmful forged audio-visual content. However, the lack of neural rendering-based videos in current audio-visual forgery datasets presents a limitation that impedes comprehensive evaluation of detection models. To address this issue, we introduce a <b>R</b>adiance <b>F</b>ield <b>A</b>udio-<b>V</b>isual (RFAV) dataset, comprising fake videos synthesized using Neural Radiance Fields (NeRF) and 3D Gaussian Splatting (3DGS), to fill this data gap. RFAV is designed for cross-paradigm evaluation, enabling a more comprehensive assessment of the generalization ability of existing audio-visual forgery detectors. Existing detectors often exhibit limited detection performance when forged videos feature highly synchronized lip movements. We rethink talking head deepfakes from a novel perspective based on the distribution of red hue in the HSV color space. We find real and forged videos exhibit distinct differences in the HSV color space, particularly in regions of intense facial motion. Based on this observation, we propose a <b>R</b>ed <b>H</b>ue-based <b>T</b>alking <b>H</b>ead <b>F</b>orgery <b>D</b>etection (RHTHFD) model. This unsupervised learning framework employs visual region attention to adaptively fuse HSV and visual features, while integrating re-weighted speech features to improve the generalization of deepfake detection. Our method achieves state-of-the-art performance on multiple evaluation benchmarks, including the proposed neural rendering-based RFAV dataset.
       </p>
-      <div class="tabs" id="tabs"></div>
-      <div class="grid" id="grid"></div>
     </section>
 
-    <footer>© <span id="year"></span> Project Page. Hosted on GitHub Pages.</footer>
+    <!-- FIGURES -->
+    <section id="figures" class="card">
+      <div class="card-head">
+        <h2>Figures</h2>
+        <div class="subhead">PDF figures are embedded below. Click “Open PDF” for full-screen viewing.</div>
+      </div>
+
+      <div class="figure-grid">
+        <!-- Method -->
+        <div class="figure-card">
+          <div class="figure-top">
+            <div class="figure-title">Method Overview</div>
+            <div class="figure-actions">
+              <a class="chip" href="assets/fig/method.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+            </div>
+          </div>
+
+          <div class="pdf-frame">
+            <embed src="assets/fig/method.pdf" type="application/pdf" />
+          </div>
+
+          <div class="figure-caption">
+            <b>Caption.</b>
+            Overview of our proposed RHTHFD. We use the visual and audio encoders of a pre-trained lip-reading network to extract vanilla visual features and temporally aligned speech features, respectively. To enable the model to effectively learn how to distinguish fake videos from the perspective of HSV color distribution, we employ DinoV2 to extract global and local semantic representations. A visual region attention mechanism is applied to fuse the semantics of the visual stream, while AWG module automatically learns feature weights based on different modalities.
+          </div>
+        </div>
+
+        <!-- Dataset -->
+        <div class="figure-card">
+          <div class="figure-top">
+            <div class="figure-title">RFAV Dataset</div>
+            <div class="figure-actions">
+              <a class="chip" href="assets/fig/dataset.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+            </div>
+          </div>
+
+          <div class="pdf-frame">
+            <embed src="assets/fig/dataset.pdf" type="application/pdf" />
+          </div>
+
+          <div class="figure-caption">
+            <b>Caption.</b>
+            Utilizing NeRF and 3DGS methods that demonstrate superior performance in visual quality, motion accuracy, lip synchronization, and head dynamics, RFAV comprises high-fidelity radiance field-based talking heads.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMOS -->
+    <section id="demos" class="card">
+      <div class="card-head">
+        <h2>Demo Videos</h2>
+        <div class="subhead">
+          ID1–ID5, each with 6 MP4 videos. Paths are expected as:
+          <code>assets/videos/IDx/1.mp4 ... 6.mp4</code>
+        </div>
+      </div>
+
+      <div class="tabs" id="tabs"></div>
+      <div class="video-grid" id="videoGrid"></div>
+
+      <div class="small-print">
+        Tip: for best browser compatibility, encode MP4 with H.264 (video) + AAC (audio).
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-left">
+        © <span id="year"></span> RHTHFD Project Page
+      </div>
+      <div class="footer-right">
+        Hosted on GitHub Pages
+      </div>
+    </footer>
   </main>
 
-  <!-- Figure zoom dialog -->
-  <dialog id="figDialog">
-    <div class="dhead">
-      <div style="font-weight:800">Method Figure</div>
-      <button class="xbtn" id="figClose" aria-label="Close">✕</button>
+  <!-- BibTeX modal (optional) -->
+  <dialog class="modal" id="bibtexModal">
+    <div class="modal-head">
+      <div class="modal-title">BibTeX</div>
+      <button class="icon-btn" id="bibtexClose" aria-label="Close">✕</button>
     </div>
-    <div class="zoom">
-      <img id="zoomImg" alt="Zoomed figure" />
+    <pre class="code" id="bibtexText">@article{liu2026rhthfd,
+  title   = {Generalizable Talking Head Deepfake Detection via Red Hue Discrepancies in HSV Color Space},
+  author  = {Ke Liu and Jiwei Wei and Zeyu Ma and Guoqing Wang and Yang Yang},
+  year    = {2026}
+}</pre>
+    <div class="modal-actions">
+      <button class="btn" id="copyBibtex">Copy</button>
+      <button class="btn btn-ghost" id="closeBibtex2">Close</button>
     </div>
   </dialog>
 
-  <script>
-    // ====== 你只需要改这块配置 ======
-    const SITE = {
-      title: "你的论文标题（替换我）",
-      venue: "Conference/Journal, 2026",
-      authors: "作者：A, B, C（替换我）",
-      affiliation: "单位：XXX University / Lab（替换我）",
-      abstract: "在这里粘贴摘要……",
-      figcap: "Figure 1: 方法概览图说明（替换我）",
-      links: { pdf:"#", arxiv:"#", code:"#", },
-
-      ids: ["ID1","ID2","ID3","ID4","ID5"],
-      perIdVideos: ["1.mp4","2.mp4","3.mp4","4.mp4","5.mp4","6.mp4"],
-      videoRoot: "assets/videos",
-      muted: true,
-    };
-
-    // ====== 文本填充 ======
-    const $ = (id)=>document.getElementById(id);
-    $("paperTitle").textContent = SITE.title;
-    $("paperVenue").textContent = SITE.venue;
-    $("authors").textContent = SITE.authors;
-    $("affiliation").textContent = SITE.affiliation;
-    $("paperAbstract").textContent = SITE.abstract;
-    $("figcap").textContent = SITE.figcap;
-    $("pdfLink").href = SITE.links.pdf;
-    $("arxivLink").href = SITE.links.arxiv;
-    $("codeLink").href = SITE.links.code;
-    $("year").textContent = new Date().getFullYear();
-
-    // ====== Tabs + Videos ======
-    const tabs = $("tabs");
-    const grid = $("grid");
-    let active = SITE.ids[0];
-
-    function videoPath(id, fn){ return `${SITE.videoRoot}/${id}/${fn}`; }
-
-    function renderTabs(){
-      tabs.innerHTML = "";
-      SITE.ids.forEach(id=>{
-        const b = document.createElement("button");
-        b.className = "tab" + (id===active ? " active" : "");
-        b.textContent = id;
-        b.onclick = ()=>{ active=id; renderTabs(); renderGrid(); };
-        tabs.appendChild(b);
-      });
-    }
-
-    function renderGrid(){
-      grid.innerHTML = "";
-      SITE.perIdVideos.forEach((fn, idx)=>{
-        const card = document.createElement("div");
-        card.className = "vcard";
-
-        const meta = document.createElement("div");
-        meta.className = "vmeta";
-        meta.innerHTML = `<b>${active}</b><span>Video ${idx+1}</span>`;
-
-        const v = document.createElement("video");
-        v.controls = true;
-        v.playsInline = true;
-        v.muted = SITE.muted;
-        v.preload = "metadata";
-        v.src = videoPath(active, fn);
-
-        card.appendChild(meta);
-        card.appendChild(v);
-        grid.appendChild(card);
-      });
-    }
-
-    renderTabs(); renderGrid();
-
-    // ====== Figure zoom ======
-    const figDialog = $("figDialog");
-    const methodImg = $("methodImg");
-    const zoomImg = $("zoomImg");
-    $("figClose").onclick = ()=>figDialog.close();
-
-    methodImg.addEventListener("click", ()=>{
-      zoomImg.src = methodImg.src;
-      figDialog.showModal();
-    });
-
-    // 点击对话框外关闭
-    figDialog.addEventListener("click", (e)=>{
-      const rect = figDialog.getBoundingClientRect();
-      const inside = rect.top<=e.clientY && e.clientY<=rect.bottom && rect.left<=e.clientX && e.clientX<=rect.right;
-      if(!inside) figDialog.close();
-    });
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
